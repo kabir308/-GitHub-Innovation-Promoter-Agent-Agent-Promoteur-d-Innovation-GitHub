@@ -3,6 +3,10 @@ Twitter connector for sharing innovative projects.
 Provides functionality to post project updates to Twitter/X.
 """
 
+# Twitter/X platform constants
+TWITTER_MAX_LENGTH = 280
+TWITTER_SAFETY_MARGIN = 10
+
 def publish_to_twitter(project):
     """
     Publish project to Twitter (mock implementation).
@@ -23,7 +27,7 @@ def publish_to_twitter(project):
     print("=" * 70)
     print(tweet)
     print("=" * 70)
-    print(f"Character count: {len(tweet)}/280")
+    print(f"Character count: {len(tweet)}/{TWITTER_MAX_LENGTH}")
     
     return {
         "status": "success",
@@ -42,10 +46,10 @@ def _generate_tweet(project):
     # Create short tweet
     tweet = f"🚀 Discover {name}\n⭐ {stars} stars\n{url}\n\n#Innovation #GitHub #OpenSource #Tech"
     
-    # Ensure it's under 280 characters
-    if len(tweet) > 280:
+    # Ensure it's under max length
+    if len(tweet) > TWITTER_MAX_LENGTH:
         # Truncate the name if needed
-        max_name_len = 280 - len(tweet) + len(name) - 10
+        max_name_len = TWITTER_MAX_LENGTH - len(tweet) + len(name) - TWITTER_SAFETY_MARGIN
         name_short = name[:max_name_len] + "..."
         tweet = f"🚀 {name_short}\n⭐ {stars} stars\n{url}\n#Innovation #GitHub"
     

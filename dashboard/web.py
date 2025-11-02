@@ -134,7 +134,11 @@ def _show_projects_list(projects):
             
             with col2:
                 st.markdown(f"[View on GitHub]({project['html_url']})")
-                st.image("badges/projet_innovant.svg", width=120)
+                # Display badge with error handling
+                try:
+                    st.image("badges/projet_innovant.svg", width=120)
+                except Exception:
+                    st.markdown("🏆 Innovation Badge")  # Fallback if image not found
 
 def _show_analytics(projects):
     """Display analytics and visualizations."""

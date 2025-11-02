@@ -1,6 +1,15 @@
 import requests
 import time
 
+# Configuration constants
+MAX_KEYWORDS_IN_QUERY = 5  # Maximum keywords to use in GitHub API query
+INNOVATION_SCORE_WEIGHTS = {
+    'stars': 0.4,
+    'forks': 0.3,
+    'watchers': 0.2,
+    'issues': 0.1
+}
+
 INNOVATION_KEYWORDS = [
     "ai", "machine learning", "blockchain", "innovant", "cloud", "edge", "quantum", 
     "decentralized", "sustainability", "innovation", "neural", "deep-learning"
@@ -28,7 +37,7 @@ def get_innovative_projects(limit=10, criteria=None):
         criteria = INNOVATION_CRITERIA
     
     GITHUB_API = "https://api.github.com/search/repositories"
-    query = "+".join(INNOVATION_KEYWORDS[:5])  # Limit keywords to avoid rate limiting
+    query = "+".join(INNOVATION_KEYWORDS[:MAX_KEYWORDS_IN_QUERY])
     params = {
         "q": f"{query} stars:>{criteria.get('min_stars', 10)} in:name,description",
         "sort": "stars",
@@ -79,8 +88,13 @@ def _calculate_innovation_score(project):
     watchers = project.get("watchers_count", 0)
     open_issues = project.get("open_issues_count", 0)
     
-    # Simple scoring algorithm
-    score = (stars * 0.4) + (forks * 0.3) + (watchers * 0.2) + (open_issues * 0.1)
+    # Use configurable weights
+    score = (
+        (stars * INNOVATION_SCORE_WEIGHTS['stars']) +
+        (forks * INNOVATION_SCORE_WEIGHTS['forks']) +
+        (watchers * INNOVATION_SCORE_WEIGHTS['watchers']) +
+        (open_issues * INNOVATION_SCORE_WEIGHTS['issues'])
+    )
     return round(score, 2)
 
 def _get_demo_projects():

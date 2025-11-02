@@ -3,6 +3,9 @@ Recommendation module for suggesting collaborations and opportunities.
 Uses project similarity and user interests to recommend connections.
 """
 
+# Default user interests
+DEFAULT_USER_INTERESTS = ["ai", "machine learning", "innovation"]
+
 def recommend_collaborations(projects, user_interests=None, limit=5):
     """
     Recommend collaboration opportunities based on projects.
@@ -16,7 +19,7 @@ def recommend_collaborations(projects, user_interests=None, limit=5):
         List of recommended projects with reasons
     """
     if user_interests is None:
-        user_interests = ["ai", "machine learning", "innovation"]
+        user_interests = DEFAULT_USER_INTERESTS
     
     recommendations = []
     

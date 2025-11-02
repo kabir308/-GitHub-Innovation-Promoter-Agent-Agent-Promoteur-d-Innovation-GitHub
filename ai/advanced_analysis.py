@@ -6,6 +6,10 @@ Includes sentiment analysis, technology detection, and trend prediction.
 import re
 from collections import Counter
 
+# Trending score configuration
+TRENDING_SCORE_NORMALIZATION_DIVISOR = 10
+TRENDING_SCORE_MAX = 100
+
 # Technology keywords database
 TECH_CATEGORIES = {
     "AI/ML": ["ai", "artificial intelligence", "machine learning", "deep learning", 
@@ -145,7 +149,7 @@ def calculate_trending_score(project):
     )
     
     # Normalize to 0-100
-    normalized = min(100, score / 10)
+    normalized = min(TRENDING_SCORE_MAX, score / TRENDING_SCORE_NORMALIZATION_DIVISOR)
     return round(normalized, 2)
 
 def assess_maturity(project):
