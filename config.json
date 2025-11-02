@@ -1,0 +1,60 @@
+{
+  "detection": {
+    "keywords": [
+      "ai",
+      "machine learning",
+      "blockchain",
+      "innovation",
+      "cloud",
+      "quantum"
+    ],
+    "criteria": {
+      "min_stars": 10,
+      "min_forks": 5,
+      "has_description": true,
+      "active_within_days": 365
+    },
+    "limit": 20
+  },
+  "promotion": {
+    "default_format": "console",
+    "enabled_platforms": [
+      "twitter",
+      "linkedin"
+    ]
+  },
+  "notifications": {
+    "channels": {
+      "console": true,
+      "email": false,
+      "webhook": false
+    },
+    "preferences": {
+      "min_stars": 100,
+      "keywords": [
+        "ai",
+        "innovation"
+      ],
+      "languages": []
+    }
+  },
+  "recommendations": {
+    "max_recommendations": 5,
+    "user_interests": [
+      "ai",
+      "machine learning",
+      "innovation"
+    ]
+  },
+  "dashboard": {
+    "port": 8501,
+    "theme": "light",
+    "auto_refresh": false
+  },
+  "api": {
+    "github_token": "",
+    "twitter_api_key": "",
+    "linkedin_api_key": ""
+  },
+  "language": "en"
+}
